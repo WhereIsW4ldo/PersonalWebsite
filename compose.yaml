@@ -32,3 +32,4 @@
       dockerfile: Dockerfile
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+      - "traifik.http.routers.personalwebsite.rule=Host(`waldo.today`)"
