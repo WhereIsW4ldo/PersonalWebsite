@@ -1,0 +1,17 @@
+name: Create and push docker image
+
+on:
+  push:
+    paths:
+      - 'docker-compose.yml'
+
+jobs:
+  rerun-docker-compose:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Run docker-compose
+        run: docker-compose up -d
