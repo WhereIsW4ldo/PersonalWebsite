@@ -2,5 +2,5 @@
   personalwebsite:
     image: personalwebsite
     build:
-      context: .
-      dockerfile: PersonalWebsite/Dockerfile
+      context: ./PersonalWebsite
+      dockerfile: Dockerfile
