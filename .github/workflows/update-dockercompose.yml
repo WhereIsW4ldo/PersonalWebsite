@@ -3,7 +3,7 @@ name: Create and push docker image
 on:
   push:
     paths:
-      - 'docker-compose.yml'
+      - 'compose.yml'
     branches: [ "master" ]
 
 jobs:
