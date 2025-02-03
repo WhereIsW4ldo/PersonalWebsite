@@ -1,6 +1,20 @@
 ﻿services:
+  
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  
   personalwebsite:
-    image: personalwebsite
+    image: ghcr.io/whereisw4ldo/personalwebsite:master
     build:
       context: ./PersonalWebsite
       dockerfile: Dockerfile
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
