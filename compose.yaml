@@ -1,0 +1,6 @@
+﻿services:
+  personalwebsite:
+    image: personalwebsite
+    build:
+      context: .
+      dockerfile: PersonalWebsite/Dockerfile
