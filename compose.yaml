@@ -1,5 +1,17 @@
 ﻿services:
+  reverse-proxy:
+    image: traefik:latest
+    command:
+      - "--api.insecure"
+      - "--providers.docker"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   
+  # update images in case new version available
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -7,10 +19,12 @@
       - "--label-enable"
       - "--interval"
       - "30"
+      - "--rolling-restart"
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   
+  # backend
   personalwebsite:
     image: ghcr.io/whereisw4ldo/personalwebsite:master
     build:
