@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'docker-compose.yml'
+    branches: [ "master" ]
 
 jobs:
   rerun-docker-compose:
