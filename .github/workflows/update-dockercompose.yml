@@ -1,9 +1,8 @@
-name: Create and push docker image
+name: Update docker-compose
 
 on:
   push:
-    paths:
-      - 'compose.yml'
+    paths: [ "compose.yaml" ]
     branches: [ "master" ]
 
 jobs:
