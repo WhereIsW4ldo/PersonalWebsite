@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-namespace PersonalWebsite.Middleware;
+namespace Backend.Api.Middleware;
 
 public static class MvcOptionsExtensions
 {

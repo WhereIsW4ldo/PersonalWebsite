@@ -28,7 +28,7 @@
   personalwebsite:
     image: ghcr.io/whereisw4ldo/personalwebsite:master
     build:
-      context: ./PersonalWebsite
+      context: ./Backend/Backend.Api
       dockerfile: Dockerfile
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
