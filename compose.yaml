@@ -24,12 +24,20 @@
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   
-  # backend
-  personalwebsite:
-    image: ghcr.io/whereisw4ldo/personalwebsite:master
+  backend:
+    image: ghcr.io/whereisw4ldo/backend:master
     build:
       context: ./Backend/Backend.Api
       dockerfile: Dockerfile
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "traefik.http.routers.personalwebsite.rule=Host(`waldo.today`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.rule=Host(`waldo.today`) && PathPrefix(`/api`)"
+  
+  frontend:
+    image: ghcr.io/whereisw4ldo/frontend:master
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`waldo.today`)"
