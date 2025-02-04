@@ -8,8 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{5F977733-746E-4C57-AC43-4DD0C80D6DAD}"
 	ProjectSection(SolutionItems) = preProject
 		..\compose.yaml = ..\compose.yaml
-		..\.github\workflows\docker-image.yml = ..\.github\workflows\docker-image.yml
 		..\.github\workflows\update-dockercompose.yml = ..\.github\workflows\update-dockercompose.yml
+		..\.github\workflows\backend-docker-build-push.yml = ..\.github\workflows\backend-docker-build-push.yml
 	EndProjectSection
 EndProject
 Global
