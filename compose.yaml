@@ -18,7 +18,6 @@
       - "80:80"
       - "443:443"
       - "8080:8080"
-      - "3000:3000"
     volumes:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
@@ -45,8 +44,8 @@
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.backend.rule=Host(`waldo.today`) && PathPrefix(`/api`)"
       - "traefik.enable=true"
-      - "traefik.http.routers.guestbook.entrypoints=websecure"
-      - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
+      - "traefik.http.routers.website.entrypoints=websecure"
+      - "traefik.http.routers.website.tls.certresolver=myresolver"
     deploy:
       mode: replicated
       replicas: 2
@@ -60,8 +59,8 @@
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`waldo.today`)"
       - "traefik.enable=true"
-      - "traefik.http.routers.guestbook.entrypoints=websecure"
-      - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
+      - "traefik.http.routers.website.entrypoints=websecure"
+      - "traefik.http.routers.website.tls.certresolver=myresolver"
   
   loki:
     image: grafana/loki:latest
@@ -105,10 +104,12 @@
         /run.sh                                                                                                                                       
     image: grafana/grafana:latest     
     labels:
-      - "traefik.http.routers.backend.rule=Host(`grafana.waldo.today`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.waldo.today`)"
       - "traefik.enable=true"
-      - "traefik.http.routers.guestbook.entrypoints=websecure"
-      - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
+      - "traefik.http.routers.website.entrypoints=websecure"
+      - "traefik.http.routers.website.tls.certresolver=myresolver"
+    ports:
+      - "3000:3000"
     networks:
       - loki
 
