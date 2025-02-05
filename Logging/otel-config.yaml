@@ -2,10 +2,7 @@
 receivers:
   otlp:
     protocols:
-      grpc:
-        endpoint: 0.0.0.0:4317
       http:
-        endpoint: 0.0.0.0:4318
 
 # Processors
 processors:
@@ -17,6 +14,8 @@ exporters:
     endpoint: "http://loki:3100/otlp"
     tls:
       insecure: true
+  logging:
+    loglevel: debug
 
 # Pipelines
 service:
