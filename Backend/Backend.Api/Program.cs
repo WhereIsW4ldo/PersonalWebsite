@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 
 var otlpEndpointUrl = builder.Configuration["OTLP_ENDPOINT_URL"];
-
 if (!string.IsNullOrEmpty(otlpEndpointUrl))
 {
     builder.Logging.AddOpenTelemetry(x =>
