@@ -1,6 +1,26 @@
-@Backend.Api_HostAddress = http://localhost:5036
-
-GET {{Backend.Api_HostAddress}}/weatherforecast/
+@Backend = http://localhost:5036
+GET {{Backend}}/api/weatherforecast/
 Accept: application/json
 
 ###
+
+
+
+
+POST {{Backend}}/api/login/
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+
+### Send POST request with json body
+POST https://examples.http-client.intellij.net/post
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}

@@ -6,6 +6,5 @@ namespace Database;
 public class UserContext : DbContext
 {
     public DbSet<LoginCredential> LoginCredentials { get; set; }
-    
-    public UserContext(DbContextOptions<UserContext> options) : base(options) { }
+    public UserContext(DbContextOptions<DbContext> options) : base(options) { }
 }

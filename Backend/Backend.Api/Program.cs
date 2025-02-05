@@ -1,5 +1,7 @@
 using Backend.Api.Middleware;
 using Database;
+using Login;
+using Login.Services;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
@@ -34,6 +36,8 @@ var connectionString = builder.Configuration.GetConnectionString("Database")
 builder.Services.AddDbContext<UserContext>(options => 
     options.UseNpgsql(connectionString));
 
+builder.Services.ConfigureLoginServices();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -43,6 +47,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+    });
 }
 
 app.UseHttpsRedirection();
