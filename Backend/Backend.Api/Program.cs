@@ -1,4 +1,6 @@
 using Backend.Api.Middleware;
+using Database;
+using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 
@@ -16,6 +18,7 @@ if (!string.IsNullOrEmpty(otlpEndpointUrl))
             a.Endpoint = new Uri(otlpEndpointUrl);
             a.Protocol = OtlpExportProtocol.HttpProtobuf;
         });
+        x.AddConsoleExporter();
     });
 }
 
@@ -24,6 +27,12 @@ builder.Services.AddControllers(o =>
 {
     o.UseRoutePrefix("api");
 });
+
+var connectionString = builder.Configuration.GetConnectionString("Database")
+    ?? throw new InvalidOperationException("Connection string 'Database' not found.");
+
+builder.Services.AddDbContext<UserContext>(options => 
+    options.UseNpgsql(connectionString));
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

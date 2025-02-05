@@ -23,4 +23,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Database\Database.csproj" />
+      <ProjectReference Include="..\Login\Login.csproj" />
+    </ItemGroup>
+
 </Project>

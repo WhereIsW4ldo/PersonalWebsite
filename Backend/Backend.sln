@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{5F
 		..\.github\workflows\backend-docker-build-push.yml = ..\.github\workflows\backend-docker-build-push.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{478BBFE5-8C06-4225-A71F-9DF1BC5537E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{EEEADD6A-77AC-4F31-BFFF-7F10EA9311AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +29,13 @@ Global
 		{E647CD2D-4763-4CE9-A833-90110AE44727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E647CD2D-4763-4CE9-A833-90110AE44727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E647CD2D-4763-4CE9-A833-90110AE44727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{478BBFE5-8C06-4225-A71F-9DF1BC5537E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{478BBFE5-8C06-4225-A71F-9DF1BC5537E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{478BBFE5-8C06-4225-A71F-9DF1BC5537E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{478BBFE5-8C06-4225-A71F-9DF1BC5537E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEEADD6A-77AC-4F31-BFFF-7F10EA9311AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEEADD6A-77AC-4F31-BFFF-7F10EA9311AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEEADD6A-77AC-4F31-BFFF-7F10EA9311AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEEADD6A-77AC-4F31-BFFF-7F10EA9311AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
