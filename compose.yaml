@@ -64,16 +64,12 @@
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
-    networks:
-      - loki
   
   promtail:                                                                                                                                         
     image: grafana/promtail:latest   
     volumes:                                 
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yml
-    networks:
-      - loki
 
   grafana:
     environment:
@@ -105,11 +101,7 @@
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls.certresolver=myresolver"
-    networks:
-      - loki
 
 volumes:
   letsencrypt:
     
-networks:
-  loki:
