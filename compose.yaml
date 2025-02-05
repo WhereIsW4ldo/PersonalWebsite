@@ -36,7 +36,6 @@
       - /var/run/docker.sock:/var/run/docker.sock
   
   backend:
-    image: ghcr.io/whereisw4ldo/backend:master
     build:
       context: ./Backend/Backend.Api
       dockerfile: Dockerfile
@@ -51,7 +50,6 @@
       replicas: 2
   
   frontend:
-    image: ghcr.io/whereisw4ldo/frontend:master
     build:
       context: ./Frontend
       dockerfile: Dockerfile
