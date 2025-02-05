@@ -77,7 +77,7 @@
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
-      - ./loki-config.yaml:/etc/loki/local-config.yaml
+      - ./Logging/loki-config.yaml:/etc/loki/local-config.yaml
 
   grafana:
     environment:
