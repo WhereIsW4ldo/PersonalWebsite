@@ -56,8 +56,8 @@
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`waldo.today`)"
       - "traefik.enable=true"
-      - "traefik.http.routers.website.entrypoints=websecure"
-      - "traefik.http.routers.website.tls.certresolver=myresolver"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
   
   loki:
     image: grafana/loki:latest
