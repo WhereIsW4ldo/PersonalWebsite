@@ -3,6 +3,8 @@ name: Create and push backend api docker image
 on:
   push:
     branches: [ "master" ]
+    paths: 
+      - Backend/*
     
 env:
   REGISTRY: ghcr.io

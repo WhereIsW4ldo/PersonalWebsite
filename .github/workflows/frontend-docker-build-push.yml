@@ -3,6 +3,8 @@ name: Create and push frontend api docker image
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - Frontend/*
 
 env:
   REGISTRY: ghcr.io
