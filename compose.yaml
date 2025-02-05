@@ -109,8 +109,6 @@
       - "traefik.enable=true"
       - "traefik.http.routers.guestbook.entrypoints=websecure"
       - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
-    ports:          
-      - "3000:3000"                                                                                                                                   
     networks:
       - loki
 
