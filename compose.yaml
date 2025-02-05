@@ -44,8 +44,6 @@
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.backend.rule=Host(`waldo.today`) && PathPrefix(`/api`)"
       - "traefik.enable=true"
-      - "traefik.http.routers.website.entrypoints=websecure"
-      - "traefik.http.routers.website.tls.certresolver=myresolver"
     deploy:
       mode: replicated
       replicas: 2
@@ -106,8 +104,6 @@
     labels:
       - "traefik.http.routers.grafana.rule=Host(`grafana.waldo.today`)"
       - "traefik.enable=true"
-      - "traefik.http.routers.website.entrypoints=websecure"
-      - "traefik.http.routers.website.tls.certresolver=myresolver"
     ports:
       - "3000:3000"
     networks:
