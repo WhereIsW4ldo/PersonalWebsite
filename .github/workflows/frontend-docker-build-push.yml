@@ -5,10 +5,11 @@ on:
     branches: [ "master" ]
     paths:
       - Frontend/*
+      - .github/workflows/frontend-docker-build-push.yml
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}-Frontend
 
 jobs:
   build-images:
