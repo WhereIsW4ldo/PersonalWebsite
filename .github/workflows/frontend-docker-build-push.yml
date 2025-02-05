@@ -4,8 +4,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
-      - Frontend/*
-      - .github/workflows/frontend-docker-build-push.yml
+      - Frontend/**
 
 env:
   REGISTRY: ghcr.io
