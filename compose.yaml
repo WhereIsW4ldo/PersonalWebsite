@@ -56,6 +56,9 @@
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`waldo.today`)"
+      - "traefik.enable=true"
+      - "traefik.http.routers.guestbook.entrypoints=websecure"
+      - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
 
 volumes:
   letsencrypt:
