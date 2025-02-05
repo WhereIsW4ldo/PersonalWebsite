@@ -1,11 +1,6 @@
 using Backend.Api.Middleware;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-
-var resource = ResourceBuilder.CreateDefault().AddService("Backend.Api");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,31 +11,12 @@ if (!string.IsNullOrEmpty(otlpEndpointUrl))
 {
     builder.Logging.AddOpenTelemetry(x =>
     {
-        x.IncludeScopes = true;
-        x.IncludeFormattedMessage = true;
         x.AddOtlpExporter(a =>
         {
             a.Endpoint = new Uri(otlpEndpointUrl);
             a.Protocol = OtlpExportProtocol.HttpProtobuf;
         });
-        x.AddConsoleExporter();
-        x.SetResourceBuilder(resource);
     });
-
-    builder.Services.AddOpenTelemetry()
-        .WithTracing(x =>
-        {
-            x.AddAspNetCoreInstrumentation()
-                .AddHttpClientInstrumentation();
-        })
-        .WithMetrics(x =>
-        {
-            x.AddOtlpExporter(a =>
-            {
-                a.Endpoint = new Uri(otlpEndpointUrl);
-                a.Protocol = OtlpExportProtocol.HttpProtobuf;
-            });
-        });
 }
 
 // Add services to the container
