@@ -103,8 +103,8 @@
     labels:
       - "traefik.http.routers.grafana.rule=Host(`grafana.waldo.today`)"
       - "traefik.enable=true"
-    ports:
-      - "80:3000"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=myresolver"
     networks:
       - loki
 
