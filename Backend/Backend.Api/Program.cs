@@ -2,11 +2,26 @@ using Backend.Api.Middleware;
 using Database;
 using Login;
 using Login.Services;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 
 var builder = WebApplication.CreateBuilder(args);
+
+const string allowedOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: allowedOrigins,
+        policy =>
+        {
+            policy
+                .WithOrigins("http://waldo.today", "https://waldo.today")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 builder.Logging.ClearProviders();
 
@@ -54,5 +69,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(allowedOrigins);
 
 app.Run();

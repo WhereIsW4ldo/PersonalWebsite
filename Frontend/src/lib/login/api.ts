@@ -1,7 +1,7 @@
 import type {LoginRequest, LoginResponse} from "$lib/login/model";
 import {loginStore} from "$lib/login/login.store";
 
-const apiUrl: string = "https://localhost:5000/api/login";
+const apiUrl: string = "https://waldo.today/api/login";
 
 export async function login(username: string, password: string): Promise<boolean> {
     const request: LoginRequest = {
