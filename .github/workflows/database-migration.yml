@@ -1,0 +1,19 @@
+name: Database Migration Update
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  rerun-docker-compose:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dotnet
+        run: |
+          cd Backend
+          dotnet ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
+          dotnet ef database update --project Database --startup-project Backend.Api
