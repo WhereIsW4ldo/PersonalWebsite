@@ -12,8 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dotnet
+      - name: Execute database migration
         run: |
           cd Backend
+          source ~/.bashrc
           dotnet ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
-          dotnet ef database update --project Database --startup-project Backend.Api
