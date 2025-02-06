@@ -2,11 +2,18 @@
 GET {{Backend}}/api/weatherforecast/
 Accept: application/json
 
-###
+
+### Register
+POST {{Backend}}/api/login/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
 
 
-
-
+### Login right credentials
 POST {{Backend}}/api/login/
 Content-Type: application/json
 
@@ -15,12 +22,11 @@ Content-Type: application/json
     "password": "admin"
 }
 
-
-### Send POST request with json body
-POST https://examples.http-client.intellij.net/post
+### Login wrong credentials
+POST {{Backend}}/api/login/
 Content-Type: application/json
 
 {
-  "id": 999,
-  "value": "content"
+  "username": "admin",
+  "password": "somethingElse"
 }

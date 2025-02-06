@@ -1,4 +1,5 @@
 using Database;
+using Database.Models;
 using Login.DTO;
 using Login.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,32 @@ public class LoginService
         _logger = logger;
         _userContext = userContext;
         _tokenService = tokenService;
+    }
+
+    public async Task<LoginResponse> Register(string username, string password)
+    {
+        _logger.LogInformation("Register endpiont called");
+        
+        if (await _userContext.LoginCredentials.AnyAsync(x => x.Username == username))
+        {
+            throw new UserAlreadyExistsException();
+        }
+        
+        await _userContext.LoginCredentials.AddAsync(new LoginCredential
+        {
+            Username = username,
+            Password = password
+        });
+        
+        await _userContext.SaveChangesAsync();
+        
+        var (accessToken, refreshToken) = _tokenService.GenerateTokens(username);
+
+        return new LoginResponse
+        {
+            AccessToken = accessToken,
+            RefreshToken = refreshToken
+        };
     }
 
     public async Task<LoginResponse> Login(string username, string password)

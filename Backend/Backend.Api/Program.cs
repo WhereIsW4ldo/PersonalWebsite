@@ -30,11 +30,7 @@ builder.Services.AddControllers(o =>
     o.UseRoutePrefix("api");
 });
 
-var connectionString = builder.Configuration.GetConnectionString("Database")
-    ?? throw new InvalidOperationException("Connection string 'Database' not found.");
-
-builder.Services.AddDbContext<UserContext>(options => 
-    options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<UserContext>();
 
 builder.Services.ConfigureLoginServices();
 
