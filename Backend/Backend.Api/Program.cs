@@ -1,4 +1,8 @@
 using Backend.Api.Middleware;
+using Database;
+using Login;
+using Login.Services;
+using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 
@@ -16,6 +20,7 @@ if (!string.IsNullOrEmpty(otlpEndpointUrl))
             a.Endpoint = new Uri(otlpEndpointUrl);
             a.Protocol = OtlpExportProtocol.HttpProtobuf;
         });
+        x.AddConsoleExporter();
     });
 }
 
@@ -24,6 +29,10 @@ builder.Services.AddControllers(o =>
 {
     o.UseRoutePrefix("api");
 });
+
+builder.Services.AddDbContext<UserContext>();
+
+builder.Services.ConfigureLoginServices();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -34,6 +43,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+    });
 }
 
 app.UseHttpsRedirection();

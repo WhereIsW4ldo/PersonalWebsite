@@ -1,6 +1,32 @@
-@Backend.Api_HostAddress = http://localhost:5036
-
-GET {{Backend.Api_HostAddress}}/weatherforecast/
+@Backend = http://localhost:5036
+GET {{Backend}}/api/weatherforecast/
 Accept: application/json
 
-###
+
+### Register
+POST {{Backend}}/api/login/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+
+### Login right credentials
+POST {{Backend}}/api/login/
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+### Login wrong credentials
+POST {{Backend}}/api/login/
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "somethingElse"
+}
