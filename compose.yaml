@@ -38,8 +38,8 @@
   backend:
     image: ghcr.io/whereisw4ldo/personalwebsite-backend:master
     build:
-      context: ./Backend/Backend.Api
-      dockerfile: Dockerfile
+      context: ./Backend
+      dockerfile: Backend.Api/Dockerfile
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.backend.rule=Host(`waldo.today`) && PathPrefix(`/api`)"
