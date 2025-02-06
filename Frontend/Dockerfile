@@ -1,4 +1,6 @@
 FROM node:23-alpine as builder
+ARG API_URL
+ENV PUBLIC_API_URL $API_URL
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -8,8 +10,6 @@ RUN npm run build
 RUN npm prune --production
 
 FROM node:22-alpine
-ARG API_URL
-ENV PUBLIC_API_URL $API_URL
 WORKDIR /app
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/
