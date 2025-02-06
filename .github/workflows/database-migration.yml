@@ -20,5 +20,7 @@ jobs:
           ./dotnet-install.sh --channel 9.0 --runtime aspnetcore
           export DOTNET_ROOT=$HOME/.dotnet
           export PATH=$PATH:$HOME/.dotnet
+          export PATH=$PATH:$HOME/.dotnet/tools
+          dotnet tool install -g dotnet-ef --version 9.*
           cd Backend
-          dotnet ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
+          dotnet-ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
