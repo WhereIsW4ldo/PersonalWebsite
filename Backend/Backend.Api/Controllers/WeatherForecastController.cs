@@ -11,9 +11,9 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly Serilog.ILogger _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(Serilog.ILogger logger)
     {
         _logger = logger;
     }
@@ -21,7 +21,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
-        _logger.LogInformation("GetWeatherForecast endpoint called");
+        _logger.Information("GetWeatherForecast endpoint called");
         
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

@@ -1,11 +1,8 @@
 using Backend.Api.Middleware;
 using Database;
 using Login;
-using Login.Services;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using OpenTelemetry.Exporter;
-using OpenTelemetry.Logs;
+using Serilog;
+using Serilog.Sinks.Grafana.Loki;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,21 +20,22 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Logging.ClearProviders();
-
-var otlpEndpointUrl = builder.Configuration["OTLP_ENDPOINT_URL"];
-if (!string.IsNullOrEmpty(otlpEndpointUrl))
-{
-    builder.Logging.AddOpenTelemetry(x =>
+var logger = new LoggerConfiguration()
+    .WriteTo.GrafanaLoki("http://localhost:3100", new []
     {
-        x.AddOtlpExporter(a =>
+        new LokiLabel
         {
-            a.Endpoint = new Uri(otlpEndpointUrl);
-            a.Protocol = OtlpExportProtocol.HttpProtobuf;
-        });
-        x.AddConsoleExporter();
-    });
-}
+            Key = "Service",
+            Value = "Backend.Api"
+        }
+    })
+    .CreateLogger();
+
+logger.Information("Program started");
+
+builder.Host.UseSerilog(logger);
+
+builder.Logging.ClearProviders();
 
 // Add services to the container
 builder.Services.AddControllers(o =>
@@ -64,12 +62,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.UseCors(allowedOrigins);
 
 app.Run();

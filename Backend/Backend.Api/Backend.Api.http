@@ -1,4 +1,4 @@
-@Backend = https://waldo.today
+@Backend = http://localhost:5036
 GET {{Backend}}/api/weatherforecast/
 Accept: application/json
 
