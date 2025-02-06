@@ -60,7 +60,7 @@ public class LoginController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError("Something went wrong while logging in {username}: {message}", loginRequestBody.Username, e.Message);
+            _logger.LogError("Something went wrong while logging in {username}: {stacktrace}", loginRequestBody.Username, e.StackTrace);
             return BadRequest();
         }
     }
