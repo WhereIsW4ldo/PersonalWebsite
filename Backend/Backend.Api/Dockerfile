@@ -1,13 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /source
 
-COPY *.sln .
-COPY ./Backend.Api/Backend.Api.csproj ./Backend.Api/
-COPY ./Database/Database.csproj ./Database/
-COPY ./Login/Login.csproj ./Login/
+COPY . .
 RUN dotnet restore
 
-COPY . .
 RUN dotnet build "Backend.Api/Backend.Api.csproj" -c Release -o /app/build
 RUN dotnet publish "Backend.Api/Backend.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false --no-restore
 
