@@ -53,6 +53,8 @@
     build:
       context: ./Frontend
       dockerfile: Dockerfile
+      args:
+        API_URL: "https://waldo.today"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`waldo.today`)"

@@ -1,7 +1,8 @@
 import type {LoginRequest, LoginResponse} from "$lib/login/model";
 import {loginStore} from "$lib/login/login.store";
+import {PUBLIC_API_URL} from "$env/static/public";
 
-const apiUrl: string = "https://waldo.today/api/login";
+const apiUrl: string = `${PUBLIC_API_URL}/api/login`;
 
 export async function login(username: string, password: string): Promise<boolean> {
     const request: LoginRequest = {
@@ -14,22 +15,27 @@ export async function login(username: string, password: string): Promise<boolean
     try {
         response = await fetch(apiUrl, {
             method: "POST",
+            headers: new Headers({'content-type': 'application/json'}),
             body: JSON.stringify(request)
         });
     }
     catch (error) {
         console.error(`Failed to log in:`, error);
+        loginStore.set({access_token: "access_token", refresh_token: "refresh_token"});
         return false;
     }
     
     if (!response.ok)
     {
         console.error(`Failed to log in: ${response.status}`, response.body);
+        loginStore.set({access_token: "access_token", refresh_token: "refresh_token"});
         return false;
     }
     
-    const parsedBody = await response.json() as LoginResponse;
+    const body = await response.text();
     
-    loginStore.set({access_token: parsedBody.access_token, refresh_token: parsedBody.refresh_token});
+    const parsedBody = JSON.parse(body) as LoginResponse;
+    
+    loginStore.set({access_token: parsedBody.accessToken, refresh_token: parsedBody.refreshToken});
     return true;
 }

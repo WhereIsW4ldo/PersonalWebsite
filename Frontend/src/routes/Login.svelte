@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {type loginInformation, loginStore} from "$lib/login/login.store";
+    import {getLoginInformation, type loginInformation, loginStore} from "$lib/login/login.store";
     import {login} from "$lib/login/api";
 
     let accessToken: string = '';
     
     loginStore.subscribe((loginInfo: loginInformation) => {
-        accessToken = loginInfo.access_token
+        accessToken = getLoginInformation().access_token;
     });
     
     let userName: string = '';
