@@ -20,14 +20,14 @@ export async function login(username: string, password: string): Promise<boolean
         });
     }
     catch (error) {
-        console.error(`Failed to log in:`, error);
+        console.error(`Error was thrown while trying to log on: `, error);
         loginStore.set({access_token: "access_token", refresh_token: "refresh_token"});
         return false;
     }
     
     if (!response.ok)
     {
-        console.error(`Failed to log in: ${response.status}`, response.body);
+        console.error(`Failed to log in: ${response.status}`, await response.text());
         loginStore.set({access_token: "access_token", refresh_token: "refresh_token"});
         return false;
     }
