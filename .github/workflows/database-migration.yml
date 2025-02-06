@@ -15,5 +15,5 @@ jobs:
       - name: Execute database migration
         run: |
           cd Backend
-          source ~/.bashrc
+          source /home/waldo/.bashrc
           dotnet ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
