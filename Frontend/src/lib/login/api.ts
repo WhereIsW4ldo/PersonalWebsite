@@ -15,7 +15,7 @@ export async function login(username: string, password: string): Promise<boolean
     try {
         response = await fetch(apiUrl, {
             method: "POST",
-            headers: new Headers({'content-type': 'application/json'}),
+            headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify(request)
         });
     }
