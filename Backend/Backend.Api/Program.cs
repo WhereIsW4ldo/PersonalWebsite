@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
 
 var logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
-    .WriteTo.GrafanaLoki("http://localhost:3100", [
+    .WriteTo.GrafanaLoki("http://loki:3100", [
         new LokiLabel
         {
             Key = "Service",
