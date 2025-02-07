@@ -57,6 +57,11 @@ jobs:
           updateAssemblyInfo: true
           updateAssemblyInfoFilename: './Backend/Backend.Api/Backend.Api.csproj'
           disableShallowCloneCheck: true
+          
+      - name: Set Version in API
+        run: |
+          cd Backend
+          dotnet-gitversion /updateprojectfiles
         
       - name: Build and push Docker image
         id: push

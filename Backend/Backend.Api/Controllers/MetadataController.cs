@@ -20,7 +20,7 @@ public class MetadataController : ControllerBase
     {
         try
         {
-            var informationalVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+            var informationalVersion = Assembly.GetExecutingAssembly().GetName().Version;
             
             if (informationalVersion is null)
             {
