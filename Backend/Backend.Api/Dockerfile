@@ -8,7 +8,7 @@ COPY ./Login/Login.csproj ./Login/
 RUN dotnet restore
 
 COPY . .
-RUN dotnet build "Backend.Api/Backend.Api.csproj" -c Release -o /app/build
+RUN dotnet build "Backend.Api/Backend.Api.csproj" -c Release -o /app/build -p:Version=$Version
 RUN dotnet publish "Backend.Api/Backend.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
