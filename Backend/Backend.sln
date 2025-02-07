@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{5F
 		..\.github\workflows\update-dockercompose.yml = ..\.github\workflows\update-dockercompose.yml
 		..\.github\workflows\backend-docker-build-push.yml = ..\.github\workflows\backend-docker-build-push.yml
 		..\.github\workflows\database-migration.yml = ..\.github\workflows\database-migration.yml
+		GitVersion.yaml = GitVersion.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{478BBFE5-8C06-4225-A71F-9DF1BC5537E1}"
