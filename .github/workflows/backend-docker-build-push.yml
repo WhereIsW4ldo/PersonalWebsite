@@ -1,4 +1,6 @@
 name: Create and push backend api docker image
+permissions: 
+  contents: write
 
 on:
   push:
