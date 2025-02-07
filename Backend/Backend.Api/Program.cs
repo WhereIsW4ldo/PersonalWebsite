@@ -21,21 +21,20 @@ builder.Services.AddCors(options =>
 });
 
 var logger = new LoggerConfiguration()
-    .WriteTo.GrafanaLoki("http://localhost:3100", new []
-    {
+    .Enrich.FromLogContext()
+    .WriteTo.GrafanaLoki("http://localhost:3100", [
         new LokiLabel
         {
             Key = "Service",
             Value = "Backend.Api"
         }
-    })
+    ])
+    .WriteTo.Console()
     .CreateLogger();
 
 logger.Information("Program started");
 
-builder.Services.AddSerilog(logger);
-
-builder.Logging.ClearProviders();
+builder.Host.UseSerilog(logger);
 
 // Add services to the container
 builder.Services.AddControllers(o =>
