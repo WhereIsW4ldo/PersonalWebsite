@@ -39,7 +39,7 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v3.1.11
         with:
-          versionSpec: '6.0.5'
+          versionSpec: '6.1.0'
           
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -54,6 +54,8 @@ jobs:
           useConfigFile: true
           configFilePath: ./Backend/GitVersion.yaml
           updateAssemblyInfo: true
+          updateAssemblyInfoFilename: './Backend/Backend.Api/Backend.Api.csproj'
+          disableShallowCloneCheck: true
         
       - name: Build and push Docker image
         id: push
