@@ -33,7 +33,7 @@ var logger = new LoggerConfiguration()
 
 logger.Information("Program started");
 
-builder.Host.UseSerilog(logger);
+builder.Services.AddSerilog(logger);
 
 builder.Logging.ClearProviders();
 
