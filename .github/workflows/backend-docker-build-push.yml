@@ -48,11 +48,12 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           
       - name: Get Version
-        id: version
+        id: version_step
         uses: gittools/actions/gitversion/execute@v3.1.11
         with:
           useConfigFile: true
-          configFilePath: ./Backend/
+          configFilePath: ./Backend/GitVersion.yaml
+          updateAssemblyInfo: true
         
       - name: Build and push Docker image
         id: push
