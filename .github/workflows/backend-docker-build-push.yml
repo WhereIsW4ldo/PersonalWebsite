@@ -39,7 +39,7 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v3.1.11
         with:
-          versionSpec: '6.1.0'
+          versionSpec: '6.0.x'
           
       - name: Extract metadata (tags, labels) for Docker
         id: meta
