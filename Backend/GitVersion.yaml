@@ -8,10 +8,8 @@ semantic-version-format: Loose
 strategies:
 - Fallback
 - ConfiguredNextVersion
-- MergeMessage
 - TaggedCommit
 - TrackReleaseBranches
-- VersionInBranchName
 - Mainline
 
 branches:
