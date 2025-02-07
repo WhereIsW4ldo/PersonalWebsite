@@ -3,6 +3,10 @@ GET {{Backend}}/api/weatherforecast/
 Accept: application/json
 
 
+### Version
+GET {{Backend}}/api/version
+
+
 ### Register
 POST {{Backend}}/api/login/register
 Content-Type: application/json
