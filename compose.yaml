@@ -104,7 +104,27 @@
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls.certresolver=myresolver"
-    
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${Sa_Password:-P@ss.0rd9}
+      - MSSQL_PID=Developer
+    user: root
+    ports:
+      - 1433:1433
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${Sa_Password:-P@ss.0rd9} -Q 'SELECT 1'"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s    
+
 volumes:
   letsencrypt:
+  sql_data:
         
