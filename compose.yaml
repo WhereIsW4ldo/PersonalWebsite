@@ -105,19 +105,6 @@
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls.certresolver=myresolver"
     
-  db:
-    image: postgres
-    restart: always
-    shm_size: 128mb
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: website
-    ports:
-      - "5432:5432"
-    volumes:
-      - /var/apps/postgres:/var/lib/postgresql/data
-
 volumes:
   letsencrypt:
-    
+        
