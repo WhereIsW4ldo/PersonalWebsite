@@ -1,27 +1,27 @@
-name: Database Migration Update
+# name: Database Migration Update
 
-on:
-  push:
-    branches: [ "master" ]
+# # on:
+# #   push:
+# #     branches: [ "master" ]
 
-jobs:
-  rerun-docker-compose:
-    runs-on: self-hosted
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   rerun-docker-compose:
+#     runs-on: self-hosted
+#     
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Execute database migration
-        run: |
-          wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-          chmod +x ./dotnet-install.sh
-          ./dotnet-install.sh --channel 9.0
-          ./dotnet-install.sh --channel 9.0 --runtime aspnetcore
-          export DOTNET_ROOT=$HOME/.dotnet
-          export PATH=$PATH:$HOME/.dotnet
-          export PATH=$PATH:$HOME/.dotnet/tools
-          dotnet tool install -g dotnet-ef --version 9.*
-          cd Backend
-          dotnet-ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
-          dotnet-ef database update --project Database --startup-project Backend.Api
+#       - name: Execute database migration
+#         run: |
+#           wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+#           chmod +x ./dotnet-install.sh
+#           ./dotnet-install.sh --channel 9.0
+#           ./dotnet-install.sh --channel 9.0 --runtime aspnetcore
+#           export DOTNET_ROOT=$HOME/.dotnet
+#           export PATH=$PATH:$HOME/.dotnet
+#           export PATH=$PATH:$HOME/.dotnet/tools
+#           dotnet tool install -g dotnet-ef --version 9.*
+#           cd Backend
+#           dotnet-ef migrations add ${{ github.sha }} --project Database --startup-project Backend.Api
+#           dotnet-ef database update --project Database --startup-project Backend.Api
