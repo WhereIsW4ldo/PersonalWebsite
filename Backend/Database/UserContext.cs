@@ -11,12 +11,19 @@ public class UserContext : DbContext
 
     public UserContext(IConfiguration configuration)
     {
-        _connectionString = configuration.GetConnectionString("Database")
-            ?? throw new InvalidOperationException("Connection string 'Database' not found.");
+        var dbConnectionSection = configuration.GetSection("DatabaseConnectionStrings");
+        
+        var connectionString = dbConnectionSection["Database"]
+                               ?? throw new InvalidOperationException("Connection string 'Database' not found.");
+
+        var password = Environment.GetEnvironmentVariable("DB_PASSWORD")
+                       ?? dbConnectionSection["DefaultPassword"];
+
+        _connectionString = string.Format(connectionString, password);
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseNpgsql(_connectionString);
+        optionsBuilder.UseSqlServer(_connectionString);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

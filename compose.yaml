@@ -40,6 +40,8 @@
     build:
       context: ./Backend
       dockerfile: Backend.Api/Dockerfile
+    environment:
+      DB_PASSWORD: ${Sa_Password:-P@ss.0rd9}
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.http.routers.backend.rule=Host(`waldo.today`) && PathPrefix(`/api`)"

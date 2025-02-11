@@ -14,6 +14,7 @@ RUN dotnet publish "Backend.Api/Backend.Api.csproj" -c Release -o /app/publish /
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/publish .
+ENV DB_PASSWORD=$SQL_PASSWORD
 EXPOSE 8080
 EXPOSE 8081
 ENTRYPOINT ["dotnet", "Backend.Api.dll"]
