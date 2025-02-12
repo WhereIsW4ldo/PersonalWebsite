@@ -1,0 +1,78 @@
+services:
+  local-backend:
+    image: ghcr.io/whereisw4ldo/personalwebsite-backend:master
+    build:
+      context: ./Backend
+      dockerfile: Backend.Api/Dockerfile
+      args:
+          SQL_PASSWORD: ${Sa_Password:-P@ss.0rd9}
+    ports:
+      - "5000:8080"
+  
+  local-letsencrypt:
+    image: ghcr.io/whereisw4ldo/personalwebsite-frontend:master
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        API_URL: "http://backend"
+    ports: 
+      - "3050:3000"
+  
+  local-loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./Logging/loki-config.yaml:/etc/loki/local-config.yaml
+
+  local-grafana:
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
+        apiVersion: 1
+        datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          orgId: 1
+          url: http://loki:3100
+          basicAuth: false
+          isDefault: true
+          version: 1
+          editable: false
+        EOF
+        /run.sh                                                                                                                                       
+    image: grafana/grafana:latest     
+    ports:
+      - "3000:3000"
+
+  local-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${Sa_Password:-P@ss.0rd9}
+      - MSSQL_PID=Developer
+    user: root
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${Sa_Password:-P@ss.0rd9} -Q 'SELECT 1'"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s    
+    ports:
+      - 1433:1433
+
+volumes:
+  sql_data:

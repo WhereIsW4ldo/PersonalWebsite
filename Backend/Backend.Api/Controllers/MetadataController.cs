@@ -1,17 +1,16 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using ILogger = Serilog.ILogger;
 
 namespace Backend.Api.Controllers;
 
 [ApiController]
 public class MetadataController : ControllerBase
 {
-    private readonly ILogger _logger;
+    private readonly Serilog.ILogger _logger;
 
-    public MetadataController(ILogger logger)
+    public MetadataController(Serilog.ILogger logger)
     {
-        _logger = logger;
+      _logger = logger;
     }
 
     [HttpGet]

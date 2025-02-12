@@ -1,12 +1,12 @@
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Login.Services;
 
 public class TokenService
 {
-    private readonly ILogger<TokenService> _logger;
+    private readonly ILogger _logger;
 
-    public TokenService(ILogger<TokenService> logger)
+    public TokenService(ILogger logger)
     {
         _logger = logger;
     }
