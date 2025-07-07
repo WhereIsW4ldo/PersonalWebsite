@@ -34,7 +34,9 @@
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  
+
+
+  # frontend docker image 
   frontend:
     image: ghcr.io/whereisw4ldo/personalwebsite-frontend:master
     build:
